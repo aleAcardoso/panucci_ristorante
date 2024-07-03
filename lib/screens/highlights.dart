@@ -26,20 +26,58 @@ class Highlights extends StatelessWidget {
               ),
             ),
           ),
-          SliverList(
-            delegate: SliverChildBuilderDelegate(
-              (context, index) {
-                return HighlightItem(
-                  imageURI: items[index]["image"],
-                  itemTitle: items[index]["name"],
-                  itemPrice: items[index]["price"],
-                  itemDescription: items[index]["description"],
-                );
-              },
-              childCount: items.length,
-            ),
-          ),
+          MediaQuery.of(context).orientation == Orientation.landscape
+              ? _LandscapeList(items: items)
+              : _PortraitList(items: items),
         ],
+      ),
+    );
+  }
+}
+
+class _PortraitList extends StatelessWidget {
+  final List items;
+
+  const _PortraitList({super.key, required this.items});
+
+  @override
+  Widget build(BuildContext context) {
+    return SliverList(
+      delegate: SliverChildBuilderDelegate(
+        (context, index) {
+          return HighlightItem(
+            imageURI: items[index]["image"],
+            itemTitle: items[index]["name"],
+            itemPrice: items[index]["price"],
+            itemDescription: items[index]["description"],
+          );
+        },
+        childCount: items.length,
+      ),
+    );
+  }
+}
+
+class _LandscapeList extends StatelessWidget {
+  final List items;
+
+  const _LandscapeList({super.key, required this.items});
+
+  @override
+  Widget build(BuildContext context) {
+    return SliverGrid(
+      delegate: SliverChildBuilderDelegate((context, index) {
+        return HighlightItem(
+          imageURI: items[index]["image"],
+          itemTitle: items[index]["name"],
+          itemPrice: items[index]["price"],
+          itemDescription: items[index]["description"],
+        );
+      }, childCount: items.length),
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        crossAxisSpacing: 8,
+        mainAxisSpacing: 8,
       ),
     );
   }
