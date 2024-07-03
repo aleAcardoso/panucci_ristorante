@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:panucci_ristorante/screens/checkout.dart';
 
-import '../screens/home.dart';
 import '../themes/app_colors.dart';
 
 class MainDrawer extends StatelessWidget {
@@ -31,7 +31,7 @@ class MainDrawer extends StatelessWidget {
               iconColor: AppColors.drawerIconColor,
               onTap: () {
                 Navigator.push(context, MaterialPageRoute(builder: ((context) {
-                  return const Home();
+                  return const Checkout();
                 })));
               },
               title: Row(
